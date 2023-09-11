@@ -1,0 +1,43 @@
+<!-- membuat ada 3 button 
+1. tampil gambar a
+2. tampil gambar b
+3. tampil gambar c -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    
+</head>
+<body>
+    <img id="image1" src="https://play-lh.googleusercontent.com/RslBy1o2NEBYUdRjQtUqLbN-ZM2hpks1mHPMiHMrpAuLqxeBPcFSAjo65nQHbTA53YYn" alt=""> <br>
+    <button onclick="myFunction1()">gambar1</button> <br>
+    <!-- <img id="image2" src="" alt=""> <br> -->
+    <button onclick="myFunction2()">gambar2</button> <br>
+    <!-- <img id="image3" src="" alt="" > <br> -->
+    <button onclick="myFunction3()">gambar3</button> <br>
+
+    <script>
+        function myFunction1(){
+            document.getElementById("image1").src=
+            "https://play-lh.googleusercontent.com/RslBy1o2NEBYUdRjQtUqLbN-ZM2hpks1mHPMiHMrpAuLqxeBPcFSAjo65nQHbTA53YYn"
+            document.getElementById("image1").width="107"
+            document.getElementById("image1").heigth="98"
+        }
+        function myFunction2(){
+            document.getElementById("image1").src=
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/640px-JavaScript-logo.png"
+            document.getElementById("image1").width="107"
+            document.getElementById("image1").heigth="98"
+        }
+        function myFunction3(){
+            document.getElementById("image1").src=
+            "https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582747_1280.png"
+            document.getElementById("image1").width="107"
+            document.getElementById("image1").heigth="98"
+        }
+    </script>
+</body>
+</html>
