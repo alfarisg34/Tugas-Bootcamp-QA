@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<body>
+    <form>
+        <input id="query" type="text">
+        <button id="myBtn" type="button" onclick="search(document.getElementById('query').value)">Search</button>
+    </form>
+    
+    <script>
+        var input = document.getElementById("query");
+        input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("myBtn").click();
+        }
+});
+        function search(query){
+            const getAllPosts = async () => {
+                try {
+                // console.log(document.getElementById('query').value)
+                let text = "https://dummyjson.com/products/search?q=" + query;
+                // console.log(text)
+                const response = await axios.get(text);
+                console.log(response.data.products);
+                } catch (error) {
+                console.log(error);
+                }
+            };
+            getAllPosts();
+        }
+    
+    </script>
+</body>
+</html>
