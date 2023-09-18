@@ -1,3 +1,8 @@
+/*
+Program untuk mengkonversi nilai dalam integer ke Abjad A-F
+process.exit() tidak perlu
+*/ 
+
 const prompt = require('prompt-sync')()
 
 let yesOrNo = "y";
@@ -27,5 +32,5 @@ while(yesOrNo.toLowerCase() != "n"){
         console.log("Input anda salah(0-100)")
     }
 }
-process.exit()
+// process.exit()
 
