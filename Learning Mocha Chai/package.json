@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "test": "mocha getNilaiAbjad.spec.js"
+  },
+  "dependencies": {
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0",
+    "prompt-sync": "^4.2.0"
+  }
+}
