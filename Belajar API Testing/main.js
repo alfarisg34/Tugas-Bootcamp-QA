@@ -1,127 +1,38 @@
 var request = require('supertest')('https://dummyjson.com')
 const chai = require('chai')
 const chaiJsonSchemaajv = require('chai-json-schema-ajv')
+const schema1 = require('./schema1')
+const schema2 = require('./schema2')
 
 chai.use(chaiJsonSchemaajv)
 const expect = chai.expect
 
 it('Test JSON Get all todos', async function () {
-	const todosSchema = {
-		type: 'object',
-		properties: {
-			todos: {
-				type: 'array',
-				items: {
-					type: 'object',
-					properties: {
-						id: { type: 'number' },
-						todo: { type: 'string' },
-						userId: { type: 'number' },
-						completed: { type: 'boolean' },
-					},
-					required: ['id']
-				}
-			}
-		}
-	}
-
 	const res = await request.get('/todos')
-	expect(res.body).have.jsonSchema(todosSchema)
+	expect(res.body).have.jsonSchema(schema1)
 })
 
 it('Test JSON Get a single todo', async function () {
-	const todoSchema = {
-		type: 'object',
-		properties: {
-			id: { type: 'number' },
-			todo: { type: 'string' },
-			userId: { type: 'number' },
-			completed: { type: 'boolean' },
-		},
-		required: ['id', 'todo', 'userId']
-	}
-
 	const res = await request.get('/todos/1')
-	expect(res.body).have.jsonSchema(todoSchema)
+	expect(res.body).have.jsonSchema(schema2)
 })
 
 it('Test JSON Get a random todo', async function () {
-	const todoRandomSchema = {
-		type: 'object',
-		properties: {
-			id: { type: 'number' },
-			todo: { type: 'string' },
-			userId: { type: 'number' },
-			completed: { type: 'boolean' },
-		},
-		required: ['id', 'todo', 'userId']
-	}
-
 	const res = await request.get('/todos/random')
-	expect(res.body).have.jsonSchema(todoRandomSchema)
+	expect(res.body).have.jsonSchema(schema2)
 })
 
 it('Test JSON Limit and skip todos', async function () {
-	const todosLimitSkipSchema = {
-		type: 'object',
-		properties: {
-			todos: {
-				type: 'array',
-				items: {
-					type: 'object',
-					properties: {
-						id: { type: 'number' },
-						todo: { type: 'string' },
-						userId: { type: 'number' },
-						completed: { type: 'boolean' },
-					},
-					required: ['id']
-				}
-			}
-		}
-	}
-
 	const res = await request.get('/todos?limit=3&skip=10')
-	expect(res.body).have.jsonSchema(todosLimitSkipSchema)
+	expect(res.body).have.jsonSchema(schema1)
 })
 
 it('Test JSON Get all todos by user id', async function () {
-	const todosByUserIdSchema = {
-		type: 'object',
-		properties: {
-			todos: {
-				type: 'array',
-				items: {
-					type: 'object',
-					properties: {
-						id: { type: 'number' },
-						todo: { type: 'string' },
-						userId: { type: 'number' },
-						completed: { type: 'boolean' },
-					},
-					required: ['id','todo','userId','completed']
-				}
-			}
-		}
-	}
-
 	const res = await request.get('/todos/user/5')
-	expect(res.body).have.jsonSchema(todosByUserIdSchema)
+	expect(res.body).have.jsonSchema(schema1)
 })
 
 it('Test JSON Add a new todo', async function () {
-	const addTodoSchema = {
-		type: 'object',
-		properties: {
-			id: { type: 'number' },
-			todo: { type: 'string' },
-			userId: { type: 'number' },
-			completed: { type: 'boolean' },
-
-		},
-		required: ['id','todo', 'userId','completed']
-	}
-
     const payload = {
         todo:"Hai", 
         completed:false,
@@ -131,22 +42,10 @@ it('Test JSON Add a new todo', async function () {
     .post('/todos/add')
     .send(payload)
 
-	expect(res.body).have.jsonSchema(addTodoSchema)
+	expect(res.body).have.jsonSchema(schema2)
 })
 
 it('Test JSON Update a todo', async function () {
-	const updateTodoSchema = {
-		type: 'object',
-		properties: {
-			id: { type: 'number' },
-			todo: { type: 'string' },
-			userId: { type: 'number' },
-			completed: { type: 'boolean' },
-
-		},
-		required: ['id','todo', 'userId','completed']
-	}
-
     const payload = {
         completed:false,
     }
@@ -154,25 +53,14 @@ it('Test JSON Update a todo', async function () {
     .put('/todos/1')
     .send(payload)
 
-	expect(res.body).have.jsonSchema(updateTodoSchema)
+	expect(res.body).have.jsonSchema(schema2)
 })
 
 it('Test JSON Delete a todo', async function () {
-	const deleteTodoSchema = {
-		type: 'object',
-		properties: {
-			id: { type: 'number' },
-			todo: { type: 'string' },
-			userId: { type: 'number' },
-			completed: { type: 'boolean' },
-
-		},
-		required: ['id','todo', 'userId','completed']
-	}
     const res = await request
     .delete('/todos/1')
 
-	expect(res.body).have.jsonSchema(deleteTodoSchema)
+	expect(res.body).have.jsonSchema(schema2)
 })
     
 // async function get(){
