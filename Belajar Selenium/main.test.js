@@ -1,4 +1,4 @@
-const {Builder , Browser, By} = require('selenium-webdriver')
+const {Builder , Browser, By, until} = require('selenium-webdriver')
 
 
 async function main(){
@@ -24,6 +24,8 @@ async function main(){
     await driver.findElement(By.css('.cart_button')).click()
     //Logout
     await driver.findElement(By.css('.bm-burger-button')).click() 
-    await driver.findElement(By.id('logout_sidebar_link')).click()
+    const logout = await driver.findElement(By.id('logout_sidebar_link'))
+    await driver.wait(until.elementIsVisible(logout), 3000)
+	await logout.click()
 }
 main()
