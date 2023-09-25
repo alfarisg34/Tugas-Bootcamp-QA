@@ -1,8 +1,9 @@
-const { WebDriver , until } = require('selenium-webdriver')
+const { WebDriver , until , By } = require('selenium-webdriver')
 const { expect } = require('chai')
 const setupDriver = require('./utils/setupDriver')
 const LoginPage = require('./pageobjects/LoginPage')
 const InventoryPage = require('./pageobjects/InventoryPage')
+const CheckOutPageOne = require('./pageobjects/CheckOutPageOne')
 
 describe('Testing web saucedemo', function () {
 	describe('LoginPage' , function(){
@@ -86,39 +87,66 @@ describe('Testing web saucedemo', function () {
 			expect(productTitle).to.be.equal('Products')
 		})
 
-		afterEach(async function () {
-			await driver.sleep(2000)
-		})
+		// afterEach(async function () {
+		// 	await driver.sleep(2000)
+		// })
 	
 		after(async function () {
 			await driver.close()
 		})
 	})
-	// describe('Inventory Page' , function(){
+	describe('Inventory Page' , function(){
 
-	// 	/** @type {WebDriver} */ let driver
-	// 	/** @type {InventoryPage} */ let inventoryPage
+		/** @type {WebDriver} */ let driver
+		/** @type {InventoryPage} */ let inventoryPage
 	
-	// 	before(async function () {
-	// 		driver = await setupDriver()
-	// 		inventoryPage = new InventoryPage(driver)
-	// 	})
+		before(async function () {
+			driver = await setupDriver()
+			inventoryPage = new InventoryPage(driver)
+		})
 		
-	// 	it('Coba menambahkan dua barang ke cart', async function () {
-	// 		await inventoryPage.openPage()
+		it.skip('Coba menambahkan dua barang ke cart', async function () {
+			await inventoryPage.openPage()
 	
-	// 		await driver.findElement(By.css('.btn_primary')).click()
-    // 		await driver.findElement(By.css('.btn_primary')).click()
-	// 		const count = await inventoryPage.getPageTitle()
-	// 		expect(count).to.be.equal(2)
-	// 	})
+			await driver.findElement(By.css('.btn_primary')).click()
+    		await driver.findElement(By.css('.btn_primary')).click()
+			const count = await inventoryPage.getPageTitle()
+			expect(count).to.be.equal(2)
+		})
 
-	// 	// afterEach(async function () {
-	// 	// 	await driver.sleep(2000)
-	// 	// })
+		// afterEach(async function () {
+		// 	await driver.sleep(2000)
+		// })
 	
-	// 	after(async function () {
-	// 		await driver.close()
-	// 	})
-	// })
+		after(async function () {
+			await driver.close()
+		})
+	})
+	describe('Checkout step one Page' , function(){
+
+		/** @type {WebDriver} */ let driver
+		/** @type {checkOutPageOne} */ let checkOutPageOne
+	
+		before(async function () {
+			driver = await setupDriver()
+			checkOutPageOne = new CheckOutPageOne(driver)
+		})
+		
+		it('Coba isi form checkout', async function () {
+			await checkOutPageOne.openPage()
+			await checkOutPageOne.checkOutProcess('alfa','sidnan','1234')
+
+			const checkOut = await driver.findElement(By.css('div[class="subheader"]')).getText()
+			console.log(checkOut)
+			expect(checkOut).to.be.equal("Checkout: Overview")
+		})
+
+		// afterEach(async function () {
+		// 	await driver.sleep(2000)
+		// })
+	
+		after(async function () {
+			await driver.close()
+		})
+	})
 })
