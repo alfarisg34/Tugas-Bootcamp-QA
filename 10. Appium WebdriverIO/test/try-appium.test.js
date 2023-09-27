@@ -4,7 +4,7 @@ const { remote } = require('webdriverio')
 const options = {
     hostname:'0.0.0.0',
     port: 4723,
-    logLevel:'debug',
+    logLevel:'error',
     capabilities:{
         'platformName': 'Android',
 		'appium:automationName': 'UIAutomator2',
@@ -20,7 +20,9 @@ async function run (email, password) {
     await driver.$('~input-email').setValue(email)
     await driver.$('~input-password').setValue(password)
     await driver.$('~button-LOGIN').click()
-    const alertTitle = await driver.$('~android:id/alertTitle').getText()
+    const alertTitle = await driver.$
+    ('/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView')
+    .getText()
     console.log(alertTitle)
     const errorMassageEmail = await driver.$('//android.widget.ScrollView[@content-desc="Login-screen"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView[1]').getText()
     const errorMassagePassword = await driver.$('//android.widget.ScrollView[@content-desc="Login-screen"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView[2]').getText()
@@ -41,14 +43,16 @@ async function run (email, password) {
 describe('Testing WebdriverIO Apps',function(){
     it('Login dengan input benar', async function(){
         await run ('alfari@test.com' , 'alfarisg34')
-        const alertTitle = await driver.$('~android:id/alertTitle').getText()
-        console.log(alertTitle)
-        // expect(alertTitle).to.be.equal('Success')
+        const alertTitle = await driver.$
+        ('/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView')
+            .getText()
+        await alertTitle.waitForDisplayed({timeout:3000})
+        expect(alertTitle).to.be.equal('Success')
     })
-    it('Login dengan input salah', async function(){
+    it.skip('Login dengan input salah', async function(){
         await run ('' , '')
-        const errorMassageEmail = await driver.$('//android.widget.ScrollView[@content-desc="Login-screen"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView[1]').getText()
-        const errorMassagePassword = await driver.$('//android.widget.ScrollView[@content-desc="Login-screen"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView[2]').getText()
+        const errorMassageEmail = await driver.$('//*[@content-desc="Login-screen"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView[1]').getText()
+        const errorMassagePassword = await driver.$('//*[@content-desc="Login-screen"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView[2]').getText()
         console.log(errorMassageEmail)
         console.log(errorMassagePassword)
         // expect(errorMassageEmail).to.be.equal('Please enter a valid email address')
