@@ -8,7 +8,7 @@ const DRIVER_OPTIONS = {
 		'platformName': 'Android',
 		'appium:automationName': 'UIAutomator2',
 		'appium:deviceName': 'emulator-5554',
-		'appium:app': path.join(process.cwd(), 'apk/commerce.apk'),
+		'appium:app': path.join(process.cwd(), 'apk/ecommerce.apk'),
 		'appium:appActivity': '.MainActivity'
 	}
 }
