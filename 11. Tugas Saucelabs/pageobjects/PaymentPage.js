@@ -8,6 +8,7 @@ class PaymentPage extends Page {
 	}
 
 	// element locators
+	get enterPaymentTextEl() { return this.driver.$('//android.widget.ScrollView[@content-desc="checkout payment screen"]/android.view.ViewGroup/android.widget.TextView[1]') }
 	get fullnameEl() { return this.driver.$('~Full Name* input field') }
 	get expireEl() { return this.driver.$('~Expiration Date* input field') }
 	get securityEl() { return this.driver.$('~Security Code* input field') }
@@ -24,6 +25,9 @@ class PaymentPage extends Page {
 		await this.expireEl.setValue('03/25')
 		await this.securityEl.setValue('123')
 		await this.reviewOrderButtonEl.click()
+	}
+	async getEnterAPaymentMethodText(){
+		return await this.enterPaymentTextEl.getText()
 	}
 }
 

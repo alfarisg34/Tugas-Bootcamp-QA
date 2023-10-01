@@ -40,6 +40,9 @@ class CheckoutPage extends Page {
 		await this.countryEl.setValue('UK')
 		await this.toPaymentButtonEl.click()
 	}
+	async getFullNameText(){
+		return await this.fullNameEl.getText()
+	}
 }
 
 module.exports = CheckoutPage

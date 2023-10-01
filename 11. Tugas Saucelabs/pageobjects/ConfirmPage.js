@@ -8,6 +8,7 @@ class ConfirmPage extends Page {
 	}
 
 	// element locators
+	get reviewYourOrderTextEl() { return this.driver.$('//android.widget.ScrollView[@content-desc="checkout review order screen"]/android.view.ViewGroup/android.widget.TextView') }
 	get placeOrderButtonEl() { return this.driver.$('~Place Order button') }
 	
 	// page actions
@@ -33,6 +34,9 @@ class ConfirmPage extends Page {
 				await this.addToCartButtonEl.click()
 				break
 		}
+	}
+	async getReviewYourOrderText(){
+		return await this.reviewYourOrderTextEl.getText()
 	}
 }
 

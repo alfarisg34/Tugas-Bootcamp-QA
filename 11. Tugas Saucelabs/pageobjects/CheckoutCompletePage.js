@@ -8,6 +8,7 @@ class CheckoutCompletePage extends Page {
 	}
 
 	// element locators
+	get checkoutCompleteTextEl() { return this.driver.$('//android.view.ViewGroup[@content-desc="checkout complete screen"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]') }
 	get continueShoopingButtonEl() { return this.driver.$('~Continue Shopping button') }
 	
 	// page actions
@@ -33,6 +34,9 @@ class CheckoutCompletePage extends Page {
 				await this.addToCartButtonEl.click()
 				break
 		}
+	}
+	async getCheckoutCompleteText(){
+		return await this.checkoutCompleteTextEl.getText()
 	}
 }
 

@@ -8,6 +8,7 @@ class InventoryPage extends Page {
 	}
 
 	// element locators
+	get headerEl() { return this.driver.$('//android.view.ViewGroup[@content-desc="container header"]/android.widget.TextView') }
 	get sortButtonEl() { return this.driver.$('~sort button') }
 	get nameAsc() { return this.driver.$('~nameAsc') }
 	get nameDesc() { return this.driver.$('~nameDesc') }
@@ -16,10 +17,13 @@ class InventoryPage extends Page {
 	get cartButtonEl() { return this.driver.$('~cart badge') }
 	get menuButtonEl() { return this.driver.$('~open menu') }
 	get catalogButtonEl() { return this.driver.$('~open menu') }
+	get logoutButtonEl() { return this.driver.$('id=android:id/button1') }
 	get itemName1El() { return this.driver
 		.$('(//android.widget.TextView[@content-desc="store item text"])[1]') }
 	get itemName2El() { return this.driver
 		.$('(//android.widget.TextView[@content-desc="store item text"])[2]') }
+	get itemName3El() { return this.driver
+		.$('(//android.widget.TextView[@content-desc="store item text"])[3]') }
 	get itemPrice1El() { return this.driver
 		.$('(//android.widget.TextView[@content-desc="store item price"])[1]') }
 	get itemPrice2El() { return this.driver
@@ -62,6 +66,16 @@ class InventoryPage extends Page {
 		await this.menuButtonEl.click()
 		await this.driver.pause(500)
 		await this.menuButtonEl.click()
+	}
+	async logout(){
+		await this.menuButtonEl.click()
+		await this.driver.pause(500)
+		await this.itemName3El.click()
+		await this.driver.pause(500)
+		await this.logoutButtonEl.click()
+	}
+	async getProductsText(){
+		return await this.headerEl.getText()
 	}
 }
 
