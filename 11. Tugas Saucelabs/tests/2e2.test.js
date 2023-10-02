@@ -9,7 +9,7 @@ const ConfirmPage = require('../pageobjects/ConfirmPage')
 const LoginPage = require('../pageobjects/LoginPage')
 const PaymentPage = require('../pageobjects/PaymentPage')
 
-describe.only('Check out barang dari awal sampai akhir Test', function () {
+describe('Check out barang dari awal sampai akhir Test', function () {
 	/** @type {WebdriverIO.Browser} */ let driver
     /** @type {InventoryPage} */ let inventoryPage
     /** @type {DetailPage} */ let detailPage
