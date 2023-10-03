@@ -17,10 +17,9 @@ export const options = {
 
 export default function () {
 	const res = http.get('https://dummyjson.com/products?limit=10&skip=10&select=title,price')
-    console.log(res.body)
 
     check(res, {
 		'responsenya harus 200': (r) => r.status === 200,
-		'di dalamnya harus ada todo': (r) => 'products' in r.json()
+		'di dalamnya harus ada products': (r) => 'products' in r.json()
 	})
 }
